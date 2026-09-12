@@ -1,0 +1,10 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: my-iris-model
+spec:
+  predictor:
+    model:
+      modelFormat:
+        name: sklearn
+      storageUri: "pvc://model-store/"

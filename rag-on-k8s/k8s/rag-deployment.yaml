@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rag-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rag-app
+  template:
+    metadata:
+      labels:
+        app: rag-app
+    spec:
+      containers:
+        - name: rag-app
+          image: rag-app:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: OLLAMA_URL
+              value: "http://ollama:11434"
+            - name: QDRANT_URL
+              value: "http://qdrant:6333"
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
